@@ -1,12 +1,12 @@
 import React from 'react'
 
 type PokemonType = {
-  
+  children?: React.ReactNode
 }
 
 function Pokemon(props: PokemonType) {
   return (
-    <div className="">Pokemon 1</div>
+    <div className="" {...props}></div>
   )
 }
 
