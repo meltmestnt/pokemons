@@ -11,7 +11,7 @@ type PokemonType = {
 }
 
 function Pokemon({ pokemon, ...rest }: PokemonType) {
-  const { sprites: { front_default: pokemonPicture }, name } = pokemon;
+  const { spriteUrl: pokemonPicture, name } = pokemon;
   return (
     <div className="min-w-64 min-h-64 w-full h-full flex flex-col items-center justify-center">
       {

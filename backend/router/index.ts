@@ -6,16 +6,22 @@ import { prisma } from './../utils/prisma';
 export const appRouter = trpc.router().query("getPokemonById", {
   input: z.object({ id: z.number() }),
   async resolve({ input }) {
-    const pokeApiClient = new PokemonClient();
+    // const pokeApiClient = new PokemonClient();
 
-    const pokemon = await pokeApiClient.getPokemonById(input.id);
+    // const pokemon = await pokeApiClient.getPokemonById(input.id);
 
-    return {
-      name: pokemon.name,
-      sprites: {
-        front_default: pokemon.sprites.front_default
-      }
-    };
+    const pokemon = await prisma.pokemon.findFirst({ where: { id: input.id } });
+
+    if (!pokemon) throw new Error("Pokemon with provided id does not exist.");
+
+    // return {
+    //   name: pokemon.name,
+    //   sprites: {
+    //     front_default: pokemon.sprites.front_default
+    //   }
+    // };
+
+    return pokemon;
   }
 }).mutation("castVote", {
   input: z.object({
@@ -26,7 +32,8 @@ export const appRouter = trpc.router().query("getPokemonById", {
 
     const voteInDb = await prisma.vote.create({
       data: {
-        ...input
+        votedAgainstId: input.votedAgainst,
+        votedForId: input.votedFor
       }
     })
 
