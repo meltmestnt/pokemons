@@ -9,7 +9,12 @@ export const appRouter = trpc.router().query("getPokemonById", {
 
     const pokemon = await api.getPokemonById(input.id);
 
-    return pokemon;
+    return {
+      name: pokemon.name,
+      sprites: {
+        front_default: pokemon.sprites.front_default
+      }
+    };
   }
 });
 

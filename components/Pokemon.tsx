@@ -4,7 +4,12 @@ import React from 'react'
 import { withQuery } from '../utils/HOC/withQuery'
 
 type PokemonType = {
-  pokemon: Pokemon,
+  pokemon: {
+    name: string,
+    sprites: {
+      front_default: string
+    }
+  },
 }
 
 function Pokemon({ pokemon, ...rest }: PokemonType) {
