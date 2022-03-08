@@ -6,9 +6,9 @@ import { prisma } from './../utils/prisma';
 export const appRouter = trpc.router().query("getPokemonById", {
   input: z.object({ id: z.number() }),
   async resolve({ input }) {
-    const api = new PokemonClient();
+    const pokeApiClient = new PokemonClient();
 
-    const pokemon = await api.getPokemonById(input.id);
+    const pokemon = await pokeApiClient.getPokemonById(input.id);
 
     return {
       name: pokemon.name,
