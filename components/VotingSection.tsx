@@ -17,7 +17,16 @@ function VotingSection(props: VotingSectionType) {
   const firstPokemon = trpc.useQuery(["getPokemonById", { id: first }]);
   const secondPokemon = trpc.useQuery(["getPokemonById", { id: second }]);
 
+  const voteMutation = trpc.useMutation(["castVote"]);
+
   const voteForRoundest: HandleVoteType = (selected) => {
+    if (selected === first) {
+      voteMutation.mutate({ votedFor: first, votedAgainst: second });
+    }
+    else {
+      voteMutation.mutate({ votedFor: second, votedAgainst: first });
+    }
+
     setPokemons(getOptionsForVote());
   }
 
