@@ -16,7 +16,7 @@ function Pokemon({ pokemon, ...rest }: PokemonType) {
     <div className="min-w-64 min-h-64 w-full h-full flex flex-col items-center justify-center">
       {
         pokemonPicture
-          && <img className='w-full h-full object-cover' src={pokemonPicture} alt={name} />
+          && <Image width={256} height={256} className='w-full h-full object-cover' src={pokemonPicture} alt={name} />
       }
       <h5 className='capitalize text-xl text-center'>{name}</h5>
     </div>
